@@ -1,0 +1,75 @@
+dwoa
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #map {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        var vaga1 = null;
+        var map;
+        
+        var vaga1Path = [
+        {lat: -21.604473, lng: -48.367903},
+        {lat: -21.604485, lng: -48.367876},
+        {lat: -21.604526, lng: -48.367896},
+        {lat: -21.604513, lng: -48.367923}
+        ];
+          
+      
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -21.604580, lng: -48.367785},
+            zoom:21
+            });
+            
+            vaga1 = new google.maps.Polygon({
+                map: map,
+                paths: vaga1Path,
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF0000',
+                fillOpacity: 0.35,
+                draggable: true,
+                geodesic: true,
+                //editable: true
+            });
+        }
+      
+      function SetParkingPermitFree(){
+        vaga1.setOptions({
+            fillColor: '#237D07',
+            strokeColor: '#237D07',
+        });    
+      }
+      
+       function SetParkingPermitBusy(){
+        vaga1.setOptions({
+            fillColor: '#FF0000',
+            strokeColor: '#FF0000',
+        });    
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtk2OkV3R32eKl7h7ndDmef5TMSImrCx8&callback=initMap" async
+    defer></script>
+</body>
+
+</html>
