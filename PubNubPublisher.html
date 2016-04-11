@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://cdn.pubnub.com/pubnub-3.14.5.js"></script>
+</head>
+
+<body>
+    <input id="send" type="button" value="Send"></input>
+    <input id="value" type="number" value="0"></input>
+</body>
+<script>
+    var pubnub = PUBNUB({
+        subscribe_key: 'sub-c-45fa8456-0034-11e6-8cfb-0619f8945a4f',
+        publish_key: 'pub-c-ca75d06a-f457-4474-8120-6748715e1d50'
+    });
+    
+    $('#send').click(function(){
+        pubnub.publish({
+        channel: 'park',
+        message: {
+           ID: 1, 
+           Status: $('#value').val()
+        },
+        callback: function(m){
+            console.log(m);
+        }
+    });
+});
+
+</script>
