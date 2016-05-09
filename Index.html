@@ -23,23 +23,6 @@
 <body>
     <div id="map"></div>
     <script>
-        
-        var pubnub = PUBNUB({
-            subscribe_key: 'sub-c-45fa8456-0034-11e6-8cfb-0619f8945a4f', // always required
-            //publish_key: 'your_pub_key' // only required if publishing
-        });
-        
-        pubnub.subscribe({
-            channel: 'park',
-            //connect: play,
-            callback: function(m) {
-                updateUI(m);
-            },
-            error: function(err) {
-                console.log(err);
-            }
-        });
-        
         var vaga1 = null;
         var map;
         
@@ -69,6 +52,22 @@
                 //editable: true
             });
         }
+        
+        var pubnub = PUBNUB({
+            subscribe_key: 'sub-c-45fa8456-0034-11e6-8cfb-0619f8945a4f', // always required
+            //publish_key: 'your_pub_key' // only required if publishing
+        });
+        
+        pubnub.subscribe({
+            channel: 'park',
+            //connect: play,
+            callback: function(m) {
+                updateUI(m);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
       
       function SetParkingPermitFree(){
         vaga1.setOptions({
@@ -91,7 +90,6 @@
                 SetParkingPermitBusy();
             }
         }
-        
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtk2OkV3R32eKl7h7ndDmef5TMSImrCx8&callback=initMap" async
     defer></script>
